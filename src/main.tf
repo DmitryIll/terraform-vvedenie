@@ -20,12 +20,11 @@ resource "random_password" "random_string" {
   min_numeric = 1
 }
 
-/*
+
 resource "docker_image" {
   name         = "nginx:latest"
   keep_locally = true
 }
-*/
 
 resource "docker_container" "nginx1" {
   image = docker_image.nginx.image_id
