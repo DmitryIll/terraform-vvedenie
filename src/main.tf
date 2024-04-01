@@ -25,6 +25,7 @@ resource "docker_image" {
   name         = "nginx:latest"
   keep_locally = true
 }
+*/
 
 resource "docker_container" "1nginx" {
   image = docker_image.nginx.image_id
@@ -35,4 +36,4 @@ resource "docker_container" "1nginx" {
     external = 9090
   }
 }
-*/
+
