@@ -13,6 +13,7 @@
     #   - "MYSQL_PASSWORD=${...}"
     #   - MYSQL_ROOT_HOST="%"
 
+/*
 resource "random_password" "ROOT_PASSWORD" {
   length      = 16
   special     = false
@@ -50,10 +51,10 @@ resource "docker_container" "mysql" {
     external = 3306
   }
 }
-
+*/
 #----------------
 
-/*
+
 resource "docker_image" "mysql" {
   name = "mysql:8"
 }
@@ -77,4 +78,3 @@ resource "docker_container" "mysql" {
   }
 }
 
-*/
