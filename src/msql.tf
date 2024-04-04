@@ -63,7 +63,7 @@ resource "random_password" "mysql_root_password" {
 }
 resource "docker_container" "mysql" {
   name = "mysql"
-  image = "${docker_image.mysql.latest}"
+  image = "${docker_image.mysql.image_id}"
   env {
     MYSQL_ROOT_PASSWORD = "${random_password.mysql_root_password.result}"
   }
