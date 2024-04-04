@@ -2,7 +2,7 @@ count_vm = 2
 
 vm=[
       {name = "vm1"
-      image = "fd82nvvtllmimo92uoul"
+      image = "fd82nvvtllmimo92uoul"   # ubuntu 22.04
       cpu = 4
       core_fraction = 100
       ram = 4
@@ -26,11 +26,12 @@ vm=[
         "wget https://hashicorp-releases.yandexcloud.net/terraform/1.5.5/terraform_1.5.5_linux_amd64.zip",
         "apt install -y unzip",
         "unzip terraform_1.5.5_linux_amd64.zip -d /root",
-        "mv /root/terraform /bin/trr"
+        "mv /root/terraform /bin/trr",
+        "git clone https://github.com/DmitryIll/terraform-vvedenie.git"
       ]},
-
+#----------- vm2 ---------------------------------------------------------------
       {name = "vm2"
-      image = "fd82nvvtllmimo92uoul"
+      image = "fd82nvvtllmimo92uoul"   # ubuntu 22.04
       cpu = 4
       core_fraction = 100
       ram = 4
@@ -49,12 +50,8 @@ vm=[
         "echo \"deb [arch=\"$(dpkg --print-architecture)\" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \"$(. /etc/os-release && echo \"$VERSION_CODENAME\")\" stable\" |  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
         "sudo apt-get update",
         "sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin",
-    #    "sudo chmod +x /root/proxy.yaml",
         "apt install -y mariadb-client-core-10.6 ",
-        "wget https://hashicorp-releases.yandexcloud.net/terraform/1.5.5/terraform_1.5.5_linux_amd64.zip",
-        "apt install -y unzip",
-        "unzip terraform_1.5.5_linux_amd64.zip -d /root",
-        "mv /root/terraform /bin/trr"
+        "git clone https://github.com/DmitryIll/terraform-vvedenie.git"
       ]}
 ]
 

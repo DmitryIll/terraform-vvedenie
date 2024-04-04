@@ -14,7 +14,7 @@ variable "vm" {
       zone = string
       preemptible = bool
       nat = bool
-      cmd = set(string)
+      cmd = list(string)
     })
   )
   description = "параметры ВМ"
