@@ -1,3 +1,5 @@
+variable count_vm {}
+
 variable "vm" {
   type = list(
     object({
@@ -16,47 +18,15 @@ variable "vm" {
     })
   )
   description = "параметры ВМ"
-  default = [
-    {
-      name = "vm"
-      image = "fd82nvvtllmimo92uoul"
-      cpu = 4
-      core_fraction = 100
-      ram = 4
-      disk_size = 16
-      allow_stopping = true
-      platform = "standard-v1"
-      zone = "ru-central1-a"
-      preemptible = true
-      nat = true
-      cmd =[
-        "sudo apt-get update",
-        "sudo apt-get install -y ca-certificates curl gnupg",
-        "sudo install -m 0755 -d /etc/apt/keyrings",
-        "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg",
-        "sudo chmod a+r /etc/apt/keyrings/docker.gpg",
-        "echo \"deb [arch=\"$(dpkg --print-architecture)\" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \"$(. /etc/os-release && echo \"$VERSION_CODENAME\")\" stable\" |  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
-        "sudo apt-get update",
-        "sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin",
-    #    "sudo chmod +x /root/proxy.yaml",
-        "apt install -y mariadb-client-core-10.6 ",
-        "wget https://hashicorp-releases.yandexcloud.net/terraform/1.5.5/terraform_1.5.5_linux_amd64.zip",
-        "apt install -y unzip",
-        "unzip terraform_1.5.5_linux_amd64.zip -d /root",
-        "mv /root/terraform /bin/trr"
-      ]
-    }
-  ]
 }
 
 
-variable hostname_blocks {}
-variable name_bloks {}
-variable images_blocks {}
-variable cores_blocks {}
-variable memory_blocks {}
-variable core_fraction_blocks {}
-variable count_vm {}
+# variable hostname_blocks {}
+# variable name_bloks {}
+# variable images_blocks {}
+# variable cores_blocks {}
+# variable memory_blocks {}
+# variable core_fraction_blocks {}
 
 #---- vms --------------
 
@@ -120,11 +90,6 @@ resource "yandex_compute_instance" "vm" {
   provisioner "remote-exec" {
     inline = "${var.vm[count.index].cmd}"
   }
-   
-   # "git clone https://github.com/DmitryIll/shvirtd-example-python.git"
-
-#    "sudo docker compose up -d"
-
 
     connection {
       type        = "ssh"
