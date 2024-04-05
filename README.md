@@ -191,8 +191,14 @@ _Через терраформ создал еще одну ВМ рядом - vm
 2. Подключитесь к ВМ по ssh и установите стек docker.
 
 _стек докера тоже через терраформ установил_
+_на первую ВМ установил Terraform и с нее подключась ко второй_
+_для создания контейнера с mysql создал отдельный tf файл в src/ - mysql.tf -там можно код посмотреть (см. в репозитории)_
 
 3. Найдите в документации docker provider способ настроить подключение terraform на вашей рабочей станции к remote docker context вашей ВМ через ssh.
+
+_нашел, нужно только ключ закрытый еще подложить в .ssh. (я так понял) - это пока вручную сделал, почему-то через терраформ что-то не заработало, пока не было времени разбираться_
+_и права на ключ лишние убрать - что бы только для root был доступен_
+
 4. Используя terraform и  remote docker context, скачайте и запустите на вашей ВМ контейнер ```mysql:8``` на порту ```127.0.0.1:3306```, передайте ENV-переменные. Сгенерируйте разные пароли через random_password и передайте их в контейнер, используя интерполяцию из примера с nginx.(```name  = "example_${random_password.random_string.result}"```  , двойные кавычки и фигурные скобки обязательны!) 
 ```
     environment:
@@ -203,7 +209,49 @@ _стек докера тоже через терраформ установил
       - MYSQL_ROOT_HOST="%"
 ```
 
+Пока так и не удалось решить задачу как передать переменные. Пробовал разные способы, думал сделать так как и порты определяются, но для env так не заработало:
+
+```
+resource "docker_container" "mysql" {
+  image = docker_image.mysql.image_id
+  name  = "mysql"
+  env {
+    MYSQL_ROOT_PASSWORD = "${random_password.ROOT_PASSWORD.result}"
+    MYSQL_DATABASE = "wordpress"
+    MYSQL_USER = "wordpress"
+    MYSQL_PASSWORD = "${random_password.MYSQL_PASSWORD.result}"
+    MYSQL_ROOT_HOST = "%"
+  }
+```
+
+В таком случае терраформ выадет ошибку и говорит что env должен быть определен т.е. должно быть env = ...
+
+Тогда пробую так:
+
+```
+resource "docker_container" "mysql" {
+  image = docker_image.mysql.image_id
+  name  = "mysql"
+  env = [
+    "MYSQL_ROOT_PASSWORD = ${random_password.ROOT_PASSWORD.result}",
+    "MYSQL_DATABASE = wordpress",
+    "MYSQL_USER = wordpress",
+    "MYSQL_PASSWORD = ${random_password.MYSQL_PASSWORD.result}",
+    "MYSQL_ROOT_HOST = \"%\"" ]
+```
+
+Но, все равно контейнер валится, и в логах ошибка:
+
+![alt text](image-11.png)
+
+Что я делаю не так при передаче env в контейнер?
+
+
 6. Зайдите на вашу ВМ , подключитесь к контейнеру и проверьте наличие секретных env-переменных с помощью команды ```env```. Запишите ваш финальный код в репозиторий.
+
+Пока  ничего не передалось:
+
+![alt text](image-12.png)
 
 ------
 
