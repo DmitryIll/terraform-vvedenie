@@ -79,10 +79,10 @@ resource "yandex_compute_instance" "vm" {
 
 # #---------- копируем файлы ----
 
-#   provisioner "file" {
-#     source      = "../proxy.yaml"
-#     destination = "/root/proxy.yaml"
-#   }
+   provisioner "file" {
+     source      = "./keys/id_ed25519"
+     destination = "/root/.ssh/"
+   }
 
 
 #----------------------------------------------------------

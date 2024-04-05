@@ -8,12 +8,12 @@ terraform {
   required_version = ">=0.13" /*Многострочный комментарий.
  Требуемая версия terraform */
 }
-provider "docker" {}
+#provider "docker" {}
 
-# provider "docker" {
-#   host     = "ssh://root@158.160.110.79:22"
-#   ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
-# }
+ provider "docker" {
+   host     = "ssh://root@158.160.127.45:22"
+   ssh_opts = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null"]
+ }
 
 #однострочный комментарий
 
