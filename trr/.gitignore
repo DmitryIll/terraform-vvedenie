@@ -1,5 +1,7 @@
 .DS_Store
 
+**/keys/*
+
 усtoken
 cloudid
 id_ed25519
