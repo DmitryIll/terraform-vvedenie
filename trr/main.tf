@@ -80,7 +80,7 @@ resource "yandex_compute_instance" "vm" {
 # #---------- копируем файлы ----
 
    provisioner "file" {
-     source      = "./keys/id_ed25519"
+     source      = "./id_ed25519"
      destination = "/root/.ssh/"
    }
 

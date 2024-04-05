@@ -27,7 +27,8 @@ vm=[
         "apt install -y unzip",
         "unzip terraform_1.5.5_linux_amd64.zip -d /root",
         "mv /root/terraform /bin/trr",
-        "git clone https://github.com/DmitryIll/terraform-vvedenie.git"
+        "git clone https://github.com/DmitryIll/terraform-vvedenie.git",
+        "chmod 700 ~/.ssh/id_ed25519"
       ]},
 #----------- vm2 ---------------------------------------------------------------
       {name = "vm2"
