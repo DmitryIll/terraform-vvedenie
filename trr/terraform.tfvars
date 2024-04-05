@@ -27,8 +27,8 @@ vm=[
         "apt install -y unzip",
         "unzip terraform_1.5.5_linux_amd64.zip -d /root",
         "mv /root/terraform /bin/trr",
-        "git clone https://github.com/DmitryIll/terraform-vvedenie.git",
-        "chmod 700 ~/.ssh/id_ed25519"
+        "git clone https://github.com/DmitryIll/terraform-vvedenie.git"
+        #"chmod 700 ~/.ssh/id_ed25519"
       ]},
 #----------- vm2 ---------------------------------------------------------------
       {name = "vm2"
@@ -53,9 +53,9 @@ vm=[
         "sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin",
         "apt install -y mariadb-client-core-10.6 ",
         "git clone https://github.com/DmitryIll/terraform-vvedenie.git",
-        "cd ~/terraform-vvedenie/src",
-        "cp .terraformrc ~",
-        "trr init"
+#        "cd ~/terraform-vvedenie/src",
+#        "cp .terraformrc ~",
+#        "trr init"
       ]}
 ]
 
