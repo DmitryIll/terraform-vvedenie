@@ -51,7 +51,10 @@ vm=[
         "sudo apt-get update",
         "sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin",
         "apt install -y mariadb-client-core-10.6 ",
-        "git clone https://github.com/DmitryIll/terraform-vvedenie.git"
+        "git clone https://github.com/DmitryIll/terraform-vvedenie.git",
+        "cd ~/terraform-vvedenie/src",
+        "cp .terraformrc ~",
+        "trr init"
       ]}
 ]
 

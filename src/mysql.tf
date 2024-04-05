@@ -51,7 +51,7 @@ resource "docker_container" "mysql" {
     external = 3306
   }
 }
-*/
+
 #----------------
 
 
@@ -78,3 +78,4 @@ resource "docker_container" "mysql" {
   }
 }
 
+*/
