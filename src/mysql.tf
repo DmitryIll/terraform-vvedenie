@@ -34,11 +34,13 @@ resource "docker_image" "mysql" {
   keep_locally = true
 }
 
+   #"MYSQL_ROOT_PASSWORD = ${random_password.ROOT_PASSWORD.result}",
+
 resource "docker_container" "mysql" {
   image = docker_image.mysql.image_id
   name  = "mysql"
   env = [
-    "MYSQL_ROOT_PASSWORD = ${random_password.ROOT_PASSWORD.result}",
+    "MYSQL_ROOT_PASSWORD = 12345 ",
     "MYSQL_DATABASE = wordpress",
     "MYSQL_USER = wordpress",
     "MYSQL_PASSWORD = ${random_password.MYSQL_PASSWORD.result}",
