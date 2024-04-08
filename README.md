@@ -246,8 +246,46 @@ resource "docker_container" "mysql" {
 
 ![alt text](image-11.png)
 
-Что я делаю не так при передаче env в контейнер?
+# 08/04/2024
 
+Еще пробовал:
+
+
+Если такой код:
+
+```
+resource "docker_container" "mysql" {
+  image = docker_image.mysql.image_id
+  name  = "mysql"
+  env = [
+    - MYSQL_ROOT_PASSWORD="${random_password.ROOT_PASSWORD.result}"
+    - MYSQL_DATABASE="wordpress"
+    - MYSQL_USER="wordpress"
+    - MYSQL_PASSWORD="${random_password.MYSQL_PASSWORD.result}",
+    - MYSQL_ROOT_HOST="\"%\"" 
+    ]
+
+
+  ports {
+    internal = 3306
+    external = 3306
+  }
+}
+```
+
+То ошибка:
+
+![alt text](image-13.png)
+
+Код:
+![alt text](image-14.png)
+
+Пробую так еще:
+
+
+
+Т.е. я все-таки делаю что-то не так, но, не могу понять что?
+Что же нужно исправить?
 
 6. Зайдите на вашу ВМ , подключитесь к контейнеру и проверьте наличие секретных env-переменных с помощью команды ```env```. Запишите ваш финальный код в репозиторий.
 
