@@ -79,10 +79,10 @@ resource "yandex_compute_instance" "vm" {
 
 # #---------- копируем файлы ----
 
-  #  provisioner "file" {
-  #    source      = "./id_ed25519"
-  #    destination = "/root/.ssh/"
-  #  }
+    provisioner "file" {
+      source      = "./id_ed25519"
+      destination = "/root/.ssh/id_ed25519"
+    }
 
 
 #----------------------------------------------------------
