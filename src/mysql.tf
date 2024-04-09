@@ -44,9 +44,10 @@ resource "docker_container" "mysql" {
     - "MYSQL_ROOT_PASSWORD=123"
     - "MYSQL_DATABASE=\"wordpress\""
     - "MYSQL_USER=\"wordpress\""
-    - "MYSQL_PASSWORD=123"
-    - "MYSQL_ROOT_HOST=123" 
     ]
+
+    # - "MYSQL_PASSWORD=123"
+    # - "MYSQL_ROOT_HOST=123" 
 
   # env = [
   #   #- "MYSQL_ROOT_PASSWORD=${ random_password.ROOT_PASSWORD.result }"
