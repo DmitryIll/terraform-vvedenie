@@ -40,18 +40,18 @@ resource "docker_container" "mysql" {
   image = docker_image.mysql.image_id
   name  = "mysql"
 
-  env = ["MYSQL_ROOT_PASSWORD=123", "MYSQL_DATABASE=\"wordpress\"", "MYSQL_USER=\"wordpress\""  ]
+  # env = ["MYSQL_ROOT_PASSWORD=123", "MYSQL_DATABASE=\"wordpress\"", "MYSQL_USER=\"wordpress\""  ]
 
-    # - "MYSQL_PASSWORD=123"
-    # - "MYSQL_ROOT_HOST=123" 
+  #   # - "MYSQL_PASSWORD=123"
+  #   # - "MYSQL_ROOT_HOST=123" 
 
-  # env = [
-  #   #- "MYSQL_ROOT_PASSWORD=${ random_password.ROOT_PASSWORD.result }"
-  #   # - "MYSQL_DATABASE=wordpress"
-  #   # - "MYSQL_USER=wordpress"
-  #   # - "MYSQL_PASSWORD=${random_password.MYSQL_PASSWORD.result}",
-  #   # - "MYSQL_ROOT_HOST=\"%\"" 
-  #   ]
+  env = [
+    - "MYSQL_ROOT_PASSWORD=${ random_password.ROOT_PASSWORD.result }"
+    - MYSQL_DATABASE=wordpress
+    - MYSQL_USER=wordpress
+    - "MYSQL_PASSWORD=${random_password.MYSQL_PASSWORD.result}",
+    - MYSQL_ROOT_HOST="%" 
+    ]
 
 
   ports {
